@@ -1,19 +1,34 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { getCurrentWeather } from "../api/weather";
 const Hero = () => {
+  const [weather, setWeather] = useState(null);
+  console.log(weather);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCurrentWeather("Kathmandu");
+        setWeather(data);
+      } catch (err) {
+        console.log("Appi error", err);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <section className="min-h-screen flex flex-col items-center  pt-[20vh]">
       <div className="w-full flex justify-around items-center border border-red-400">
         <div className="flex flex-col ml-20">
-          <p className="font-bold text-3xl">Nepal</p>
+          <p className="font-bold text-3xl">{weather?.location.name}</p>
           <p className="font-semibold">Chances of ran: 0%</p>
 
-          <p className="font-bold text-3xl mt-10">31 degrees</p>
+          <p className="font-bold text-3xl mt-10">{weather?.current.temp_c}°</p>
         </div>
 
         <div className=" mr-20">
           {/* weather image here */}
-          <img className="" src="" alt="sun image" />
+          <img src={weather?.current?.condition?.icon} alt="sun image" />
+          <p className="font-semibold">{weather?.current?.condition.text}</p>
+          <p className="font-semibold">UV:{weather?.current.uv}</p>
         </div>
       </div>
 
