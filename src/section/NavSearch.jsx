@@ -3,9 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 
-const NavSearch = ({ city, setCity, handleSearch }) => {
+const NavSearch = ({
+  city,
+  setCity,
+  handleSearch,
+  mobileMenu,
+  setMobileMenu,
+}) => {
   return (
-    <div className="h-[10vh] w-full fixed  flex justify-center items-center ">
+    <div className="h-[10vh] w-full fixed sm:flex justify-center items-center ">
       <div className=" flex bg-black rounded-lg shadow-md overflow-hidden  ">
         <Input
           placeholder="Search City.."
