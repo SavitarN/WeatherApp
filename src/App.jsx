@@ -7,9 +7,7 @@ function App() {
 
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
-
-  const [mobileMenu, setMobileMenu] = useState(false);
-
+  console.log(weather);
   const handleSearch = async () => {
     if (!city) return;
 
@@ -26,13 +24,7 @@ function App() {
   }, []);
   return (
     <main className="min-h-screen bg-blue-950 relative">
-      <NavSearch
-        city={city}
-        setCity={setCity}
-        handleSearch={handleSearch}
-        mobileMenu={mobileMenu}
-        setMobileMenu={setMobileMenu}
-      />
+      <NavSearch city={city} setCity={setCity} handleSearch={handleSearch} />
 
       {weather && <Hero weather={weather} forecast={forecast} />}
     </main>
