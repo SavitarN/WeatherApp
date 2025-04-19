@@ -26,18 +26,30 @@ const Hero = ({ weather, forecast }) => {
         {/* Todays forcasting */}
 
         <div className=" text-white rounded-lg bg-gray-600">
-          <p className="text-gray-50 text-sm ml-2 mb-5  ">TODAY'S FORECAST</p>
+          <p className="text-gray-50 text-sm ml-2 mb-5 p-3 ">
+            TODAY'S FORECAST
+          </p>
           <div className="grid md:grid-cols-6 sm:grid-cols-5 max-sm:grid-cols-3 gap-10 ">
-            {forecast.map((elem) => (
-              <div
-                key={elem.time_epoch}
-                className="flex flex-col items-center justify-center  border-r border-white/30"
-              >
-                <p>{elem.time}</p>
-                <img src={elem.condition.icon}></img>
-                <p>{elem.temp_f}</p>
-              </div>
-            ))}
+            {forecast
+              .filter((elem) => {
+                const hour = new Date(elem.time).getHours();
+
+                return hour >= 5 && hour < 11;
+              })
+              .map((elem) => {
+                return (
+                  <div
+                    key={elem.time_epoch}
+                    className="flex flex-col items-center justify-center  border-r border-white/30 p-5"
+                  >
+                    <p className="text-center">
+                      {new Date(elem.time).getHours()}:00
+                    </p>
+                    <img src={elem.condition.icon}></img>
+                    <p>{elem.temp_f}</p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
