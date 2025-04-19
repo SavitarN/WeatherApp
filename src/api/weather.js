@@ -5,14 +5,15 @@ const BASE_URL = 'http://api.weatherapi.com/v1/';
 
 export const getCurrentWeather = async (city) => {
     try {
-        const response = await axios.get(`${BASE_URL}/current.json`, {
+        const response = await axios.get(`${BASE_URL}/forecast.json`, {
             params: {
                 key: API_KEY,
                 q: city,
-                datys: 1,
+                days: 1,
                 aqi: 'no'
             }
         })
+
         return response.data;
     } catch (error) {
         console.log('error fetching weather', error);
